@@ -3,18 +3,26 @@
 namespace App\Services;
 
 use App\Contact;
-
+use App\Interfaces\ContactRepository;
 
 class ContactService
 {
-	
-	public static function findByName(): Contact
+	private $contactRepository;
+
+	public function __construct(ContactRepository $contactRepository)
 	{
-		// queries to the db
+		$this->contactRepository = $contactRepository;		
 	}
 
-	public static function validateNumber(string $number): bool
+	public function findByName($name): Contact
 	{
-		// logic to validate numbers
+		return $this->contactRepository->findByName($name);
+	}
+
+	public function validateNumber(string $number): bool
+	{
+		return filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => [
+			'regexp' => '/[[0-9]{9}]/']
+		]);
 	}
 }

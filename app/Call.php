@@ -2,12 +2,17 @@
 
 namespace App;
 
-
 class Call
 {
-	
-	function __construct()
+	private $contact;
+
+	function __construct(Contact $contact)
 	{
-		# code...
+		$this->contact = $contact;
+	}
+
+	public function getContact()
+	{
+		return $this->contact;
 	}
 }

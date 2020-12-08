@@ -2,11 +2,25 @@
 
 namespace App;
 
-
-class Contact
+final class Contact
 {
-	public function __construct()
+	private $name;
+	
+	private $number;
+
+	public function __construct(string $name, string $number)
 	{
-		# code...
+		$this->name = $name;
+		$this->number = $number;
+	}
+
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	public function getNumber()
+	{
+		return $this->number;
 	}
 }

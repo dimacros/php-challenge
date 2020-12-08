@@ -7,18 +7,21 @@ use App\Services\ContactService;
 
 class Mobile
 {
-	protected $provider;
+	private $provider;
 	
-	public function __construct(CarrierInterface $provider)
+	private $contactService;
+
+	public function __construct(CarrierInterface $provider, ContactService $contactService)
 	{
 		$this->provider = $provider;
+		$this->contactService = $contactService;
 	}
 
 	public function makeCallByName($name = '')
 	{
 		if( empty($name) ) return;
 
-		$contact = ContactService::findByName($name);
+		$contact = $this->contactService->findByName($name);
 
 		$this->provider->dialContact($contact);
 
